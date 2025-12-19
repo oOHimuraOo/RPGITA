@@ -1448,7 +1448,7 @@
                             <div class="health-box">
                                 <div class="health-label">Dados de vida</div>
                                 <div class="health-value" id="hp-dice-display">d8</div>
-                                <input type="number" class="parchment-input" id="hp-input" min="0" value="10" style="width: 120px; margin: 10px auto; text-align: center;">
+                                <input type="number" class="parchment-input" id="hp-dice-input" min="0" value="10" style="width: 120px; margin: 10px auto; text-align: center;">
                                 <div style="color: var(--eclipse-grey); font-size: 0.9rem; margin-top: 5px;">
                                     Máximo: <span id="hp-max">10</span>
                                 </div>
@@ -2647,7 +2647,7 @@
             });
         }
 
-        function updateHP() {
+        function updateHP(cura = false) {
             const level = characterData.basic.level;
             const conMod = Math.floor((characterData.attributes.constitution - 10) / 2);
             const rolled = true;
@@ -2661,7 +2661,7 @@
             
             characterData.combat.hp.max = maxHP;
             
-            const currentHP = parseInt(document.getElementById('hp-input').value) || characterData.combat.hp.current;
+            const currentHP = cura ? characterData.combat.hp.current : parseInt(document.getElementById('hp-input').value);
             const tempHP = parseInt(document.getElementById('hp-temp-input').value) || characterData.combat.hp.temp;
             
             characterData.combat.hp.current = Math.min(Math.max(currentHP, 0), maxHP);
@@ -2802,7 +2802,7 @@
             document.getElementById('heal-btn').addEventListener('click', function() {
                 const healAmount = Math.floor(Math.random() * 6) + 1 + Math.floor((characterData.attributes.wisdom - 10) / 2);
                 characterData.combat.hp.current = Math.min(characterData.combat.hp.current + healAmount, characterData.combat.hp.max);
-                updateHP();
+                updateHP(true);
                 showNotification(`Curado em ${healAmount} PV! PV Atual: ${characterData.combat.hp.current}`);
                 saveCharacterData();
             });
@@ -2817,7 +2817,8 @@
 
             document.getElementById('full-heal-btn').addEventListener('click', function() {
                 characterData.combat.hp.current = characterData.combat.hp.max;
-                updateHP();
+                console.log(characterData.combat.hp.current);
+                updateHP(true);
                 showNotification('Cura completa realizada!');
                 saveCharacterData();
             });
@@ -3109,7 +3110,7 @@
             // Rest buttons
             document.getElementById('short-rest-btn').addEventListener('click', function() {
                 // Heal some HP
-                const healDice = Math.floor(characterData.basic.level / 2) + 1;
+                const healDice = document.getElementById('hp-dice-input').value;
                 let healAmount = 0;
                 for (let i = 0; i < healDice; i++) {
                     healAmount += Math.floor(Math.random() * 6) + 1 + Math.floor((characterData.attributes.constitution - 10) / 2);
@@ -3130,6 +3131,7 @@
                 // Full heal
                 characterData.combat.hp.current = characterData.combat.hp.max;
                 characterData.combat.hp.temp = 0;
+                document.getElementById('hp-dice-input').value = characterData.basic.level;
                 
                 // Restore all PE
                 characterData.eclipse.pe.current = characterData.eclipse.pe.max;
