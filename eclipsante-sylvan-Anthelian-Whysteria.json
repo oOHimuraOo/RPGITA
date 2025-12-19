@@ -1,0 +1,106 @@
+{
+  "basic": {
+    "name": "Anthelian Whysteria",
+    "quote": "Entre a luz e a sombra, floresço no eclipse",
+    "player": "",
+    "level": 10,
+    "race": "Sylvan",
+    "class": "Eclipsante",
+    "background": "orfao",
+    "alignment": "CB",
+    "xp": 0
+  },
+  "attributes": {
+    "strength": 9,
+    "dexterity": 17,
+    "constitution": 10,
+    "intelligence": 13,
+    "wisdom": 20,
+    "charisma": 17
+  },
+  "combat": {
+    "hp": {
+      "current": 10,
+      "max": 66,
+      "temp": 0
+    },
+    "ac": 13,
+    "initiative": 3,
+    "deathSaves": {
+      "success": 0,
+      "fail": 0
+    },
+    "attacks": [
+      {
+        "name": "Rapieira",
+        "bonus": "+5",
+        "damage": "1d8+3",
+        "type": "perfurante",
+        "notes": ""
+      },
+      {
+        "name": "Arco Curto",
+        "bonus": "+5",
+        "damage": "1d6+3",
+        "type": "perfurante",
+        "range": "80/320",
+        "notes": ""
+      },
+      {
+        "name": "Adaga",
+        "bonus": "+5",
+        "damage": "1d4+3",
+        "type": "perfurante/cortante",
+        "notes": ""
+      }
+    ]
+  },
+  "skills": {
+    "selected": [
+      "Furtividade",
+      "Percepção",
+      "Intuição",
+      "Atuação"
+    ],
+    "expertise": [],
+    "proficiencies": []
+  },
+  "saves": {
+    "selected": [
+      "dex",
+      "wis"
+    ]
+  },
+  "eclipse": {
+    "scale": 3,
+    "pe": {
+      "current": 4,
+      "max": 4
+    },
+    "scaleState": "conspicuidade"
+  },
+  "equipment": {
+    "money": {
+      "pp": 0,
+      "pc": 0,
+      "pe": 0,
+      "po": 0,
+      "pl": 0
+    },
+    "weapons": "[d7]",
+    "armor": "[d8]",
+    "equipment": "[d9]",
+    "magicItems": "[d10]"
+  },
+  "feats": [],
+  "lore": {
+    "backstory": "[d12]",
+    "personality": "[d13]",
+    "ideals": "[d14]",
+    "bonds": "[d15]",
+    "flaws": "[d16]",
+    "notes": "[d17]"
+  },
+  "customBackground": null,
+  "additionalProficiencies": "[d11]"
+}
