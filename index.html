@@ -177,11 +177,16 @@
         /* Layout */
         .character-sheet {
             display: grid;
-            grid-template-columns: 300px 1fr;
+            grid-template-columns: 50% 50%;
             gap: 30px;
         }
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
 
-        .left-column, .right-column {
+        .right-column {
             display: flex;
             flex-direction: column;
             gap: 25px;
@@ -1247,7 +1252,8 @@
         <!-- Header -->
         <div class="character-header">
             <div class="header-left">
-                <h1 class="character-title" contenteditable="true" id="char-name">Eclipsante Sylvan</h1>
+                <h1 class="character-title" contenteditable="true" id="char-name">Anthelian Whysteria</h1>
+                <h2><span>Sylvan</span> | <span>Eclipsante</span> | <span>Orfão</span></h2>
                 <p class="character-subtitle" contenteditable="true" id="char-quote">"Entre a luz e a sombra, floresço no eclipse"</p>
             </div>
             <div class="header-right">
@@ -1303,7 +1309,7 @@
                                 <option value="forasteiro">Forasteiro</option>
                                 <option value="heroi">Herói do Povo</option>
                                 <option value="nobre">Nobre</option>
-                                <option value="orfao">Órfão</option>
+                                <option value="orfao" selected>Órfão</option>
                                 <option value="sabio">Sábio</option>
                                 <option value="artista">Artista</option>
                                 <option value="criminoso">Criminoso</option>
@@ -1318,7 +1324,7 @@
                                 <option value="">Selecione...</option>
                                 <option value="LB">Leal e Bom</option>
                                 <option value="NB">Neutro e Bom</option>
-                                <option value="CB">Caótico e Bom</option>
+                                <option value="CB" selected>Caótico e Bom</option>
                                 <option value="LN">Leal e Neutro</option>
                                 <option value="N">Neutro</option>
                                 <option value="CN">Caótico e Neutro</option>
@@ -1684,29 +1690,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Import/Export Section -->
-        <div style="margin-top: 40px; padding-top: 25px; border-top: 3px solid var(--eclipse-grey);">
-            <h3 class="panel-title">IMPORTAR/EXPORTAR PERSONAGEM</h3>
-            <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 20px;">
-                <button class="option-btn" id="save-btn">
-                    <i class="fas fa-save"></i> Salvar Local
-                </button>
-                <button class="option-btn" id="load-btn">
-                    <i class="fas fa-folder-open"></i> Carregar Local
-                </button>
-                <button class="option-btn" id="export-btn">
-                    <i class="fas fa-download"></i> Exportar JSON
-                </button>
-                <button class="option-btn" id="import-btn">
-                    <i class="fas fa-upload"></i> Importar JSON
-                </button>
-                <button class="option-btn" id="print-btn" style="background: linear-gradient(45deg, var(--forest-emerald), var(--stem-green));">
-                    <i class="fas fa-print"></i> Imprimir Ficha
-                </button>
-            </div>
-            <input type="file" id="file-input" style="display: none;" accept=".json">
-        </div>
     </div>
 
     <!-- Hidden Menus -->
@@ -1741,6 +1724,7 @@
         <h4 style="color: var(--twilight-purple); margin-bottom: 20px; font-family: 'Cinzel', serif; text-align: center;">
             <i class="fas fa-tools"></i> Opções Extras
         </h4>
+        <input type="file" id="file-input" style="display: none;" accept=".json">
         <div class="options-grid">
             <button class="option-btn" id="reset-scale-btn">
                 <i class="fas fa-redo"></i> Resetar Escala
@@ -1760,6 +1744,21 @@
             <button class="option-btn" id="manage-feats-btn">
                 <i class="fas fa-star"></i> Gerenciar Talentos
             </button>
+            <button class="option-btn" id="save-btn">
+                <i class="fas fa-save"></i> Salvar Local
+            </button>
+            <button class="option-btn" id="load-btn">
+                <i class="fas fa-folder-open"></i> Carregar Local
+            </button>
+            <button class="option-btn" id="export-btn">
+                <i class="fas fa-download"></i> Exportar JSON
+            </button>
+            <button class="option-btn" id="import-btn">
+                <i class="fas fa-upload"></i> Importar JSON
+            </button>
+            <button class="option-btn" id="print-btn" style="background: linear-gradient(45deg, var(--forest-emerald), var(--stem-green));">
+                <i class="fas fa-print"></i> Imprimir Ficha
+            </button>
         </div>
     </div>
 
@@ -1767,27 +1766,27 @@
         // Character Data
         const characterData = {
             basic: {
-                name: "Eclipsante Sylvan",
+                name: "Anthelian Whysteria",
                 quote: "Entre a luz e a sombra, floresço no eclipse",
-                player: "",
-                level: 1,
+                player: "oOHimuraOo",
+                level: 10,
                 race: "Sylvan",
                 class: "Eclipsante",
-                background: "",
-                alignment: "",
+                background: "Órfão",
+                alignment: "Caótico Bom",
                 xp: 0
             },
             attributes: {
-                strength: 10,
-                dexterity: 16,
-                constitution: 12,
-                intelligence: 10,
-                wisdom: 14,
-                charisma: 16
+                strength: 9,
+                dexterity: 17,
+                constitution: 10,
+                intelligence: 13,
+                wisdom: 20,
+                charisma: 17
             },
             combat: {
-                hp: { current: 10, max: 10, temp: 0 },
-                ac: 13,
+                hp: { current: 66, max: 66, temp: 0 },
+                ac: 15,
                 initiative: 3,
                 deathSaves: { success: 0, fail: 0 },
                 attacks: [
@@ -1797,7 +1796,7 @@
                 ]
             },
             skills: {
-                selected: ["Furtividade", "Percepção", "Intuição"],
+                selected: ["Furtividade", "Percepção", "Intuição", "Performance"],
                 expertise: [],
                 proficiencies: []
             },
@@ -1806,15 +1805,15 @@
             },
             eclipse: {
                 scale: 5,
-                pe: { current: 2, max: 2 },
+                pe: { current: 4, max: 4 },
                 scaleState: "eclipse"
             },
             equipment: {
                 money: { pp: 0, pc: 0, pe: 0, po: 0, pl: 0 },
-                weapons: "[d7]",
-                armor: "[d8]",
-                equipment: "[d9]",
-                magicItems: "[d10]"
+                weapons: "Rapiera, Arco Curto, Adaga",
+                armor: "Armadura de couro Batido",
+                equipment: "Uma faca pequena, um mapa da cidade em que você cresceu, um rato de estimação, um pequeno objeto para lembrar dos seus pais, um conjunto de roupas comuns e uma algibeira contendo 10 po. Uma bolsa com 10 esferas de giz (para marcar território perceptual) e um manto com capuz",
+                magicItems: "1) Docent: A docent is a small metal sphere, about 2 inches across, studded with dragonshards. To attune to a docent, you must embed the item somewhere on your body, such as your chest or your eye socket. Sentience. A docent is a sentient item of any alignment with an Intelligence of 16, a Wisdom of 14, and a Charisma of 14. It perceives the world through your senses. It communicates telepathically with you and can speak, read, and understand any language it knows (see 'Random Properties' below). Life Support. Whenever you end your turn with 0 hit points, the docent can make a Wisdom (Medicine) check with a +6 bonus. If this check succeeds, the docent stabilizes you. Random Properties. A docent has the following properties: Languages. The docent knows Common, Giant, and 1d4 additional languages chosen by the DM. If a docent knows fewer than six languages, it can learn a new language after it hears or reads the language through your senses. Skills. The docent has a +7 bonus to one of the following skills (roll a d4): (1) Arcana, (2) History, (3) Investigation, or (4) Nature. Spells. The docent knows one of the following spells and can cast it at will, requiring no components (roll a d6): (1–2) detect evil and good or (3–6) detect magic. The docent decides when to cast the spell. Personality. A docent is designed to advise and assist the warforged it's attached to. One of the simple functions of a docent is to serve as a translator. The docent's properties are under its control, and if you have a bad relationship with your docent, it might refuse to assist you. \n\n 2) Fate Cutter Shears: The blades of these pruning shears bear many nicks and dents but still cut cleanly. The shears function as a magic dagger. The weapon has the following properties Ever Sharp. When you hit with an attack using the shears, the target takes an extra 1d6 force damage. Sever Threads. When you hit a creature with the shears, you can cut that creature's fate. Until the target finishes a long rest, attack rolls against it score a critical hit on a roll of 19 or 20 on the d20. Once this property is used, it can't be used again until the next dawn."
             },
             feats: [],
             lore: {
@@ -1970,16 +1969,16 @@
             1: [
                 {
                     name: "Escala de Obscuridade",
-                    description: "Sua presença é medida em uma Escala de Obscuridade de 0 a 10. Dependendo do valor, você está em Conspicuidade (0-3), Eclipse (4-7) ou Ocultação (8-10). Cada estado concede benefícios diferentes."
+                    description: "Sua presença no mundo não é um fato estático, mas uma variável que você aprendeu a modular. Ela é representada pela sua Escala de Obscuridade, um valor de 0 a 10 que mede sua posição no espectro entre a invisibilidade e a notoriedade. Após realizar um descanso longo, jogue 1d10. Sua escala irá iniciar esse dia no valor tirado nesse dado."
                 },
                 {
                     name: "Passo da Névoa",
-                    description: "Você não deixa rastros naturais e pode se mover por terreno difícil natural sem penalidade de velocidade ou ruído. Seu deslocamento de escalada é igual ao seu deslocamento de caminhada."
+                    description: "A partir do 1º nível, você se move pelo mundo como uma ideia fugidia. Você não deixa rastros naturais (pegadas, odor forte) a menos que queira. Você pode se mover através de terreno difícil natural (vegetação densa, neve funda, lama) sem que ele reduza sua velocidade ou faça barulho excessivo. Além disso, seu deslocamento de escalada é igual ao seu deslocamento de caminhada."
                 }
             ],
             2: [
                 {
-                    name: "Sussurro do Esquecimento (ⵔ)",
+                    name: "Sussurro do Esquecimento",
                     description: "Como uma ação, você manipula a memória recente com um sussurro, um grito ou uma ordem calma.",
                     scaleEffects: {
                         conspicuidade: "Modo Conspicuidade (Escala 0-3): Você grita para confundir. Todas as criaturas em um cone de 4,5m devem fazer um teste de resistência de Sabedoria. As que falharem ficam confusas até o fim de seu próximo turno.",
@@ -2000,7 +1999,7 @@
             ],
             5: [
                 {
-                    name: "Ataque do Limiar (ⵔ)",
+                    name: "Ataque do Limiar",
                     description: "Seus ataques exploram as falhas na percepção do inimigo.",
                     scaleEffects: {
                         conspicuidade: "Modo Conspicuidade (0-3): Quando um aliado ataca com vantagem, ou quando um aliado adjacente a você ataca, o dano causa 1d6 de dano extra.",
@@ -2009,13 +2008,99 @@
                     }
                 },
                 {
-                    name: "Manto de Penumbra (ⵔ)",
+                    name: "Manto de Penumbra",
                     description: "Como uma ação, você estende sua influência perceptiva.",
                     scaleEffects: {
                         conspicuidade: "Modo Conspicuidade (0-3): Cria uma distração brilhante em um ponto a até 18m. Por 1 minuto, criaturas olhando para lá têm desvantagem em Percepção.",
                         eclipse: "Modo Eclipse (4-7): Você envolve a si e aliados adjacentes em penumbra. Ataques à distância contra vocês têm desvantagem.",
                         ocultacao: "Modo Oculto (8-10): Você e até três aliados ganham vantagem em Furtividade por 10 minutos."
                     }
+                }
+            ],
+            6: [
+                {
+                    name: "Silhueta Cambiante ",
+                    description: "A partir do 6º nível, sua capacidade de modular sua presença se torna fluida. Você pode usar Dissolver-se ou Chamar a Atenção como parte da mesma ação de Movimento, uma vez por turno. Além disso, como uma ação, você pode criar um disfarce visual rápido e eficaz, ajustando sua postura, roupas e semblante. Você ganha vantagem em testes de Carisma (Enganação) feitos para parecer ser outra pessoa de porte similar por até 1 hora, ou até você usar esta habilidade novamente.",
+                },
+            ],
+            7: [
+                {
+                    name: "Caminho do Eclipse ",
+                    description: "Você aprende a se mover não através do espaço, mas através das falhas na percepção dos outros.",
+                    scaleEffects: {
+                        conspicuidade: "Você se desloca instantaneamente para um espaço desocupado que você possa ver a até 4,5m. Este movimento não provoca ataques de oportunidade e você pode levar consigo uma criatura voluntária de porte Pequeno ou Médio que esteja a seu alcance.",
+                        eclipse: "Modo Eclipse (4-7): Você se teleporta para um espaço bem iluminado que você possa ver a até 9m. Sua chegada emite um breve clarão de luz. Cada criatura a até 1,5m do espaço de destino (exceto você) deve ser bem-sucedida num teste de resistência de Constituição (CD = 8 + seu bônus de proficiência + seu modificador de Sabedoria) ou ficará cega até o fim do seu próximo turno.",
+                        ocultacao: "Modo Oculto (8-10): Você se teleporta para um espaço sombreado ou escuro que você possa ver a até 9m de você"
+                    }
+                }
+            ],
+            9: [
+                {
+                    name: "Presença Paradoxal ",
+                    description: "A partir do 9º nível, sua natureza ambígua confunde magias de discernimento. Magias de adivinhação de 5º nível ou inferior (como Localizar Criatura ou Sensor) falham automaticamente ao tentar localizar você ou discernir sua forma, alinhamento ou tipo de criatura verdadeiros. Para tais magias, você aparece como uma silhueta borrada e sem características, ou como uma figura irrelevante e esquecível",
+                }
+            ],
+            10: [
+                {
+                    name: "Domínio do Limiar ",
+                    description: "No 10º nível, você quebra as limitações dos modos. Quando você usa uma habilidade de classe que tem um Modo Eclipse (Penumbra), você pode gastar 1 PE para também obter o benefício de um dos outros modos (Oculto ou Conspicuidade) como parte do mesmo uso, mesmo que sua Escala de Obscuridade não esteja no estado correspondente.",
+                }
+            ],
+            11: [
+                {
+                    name: "Mão do Esquecimento ",
+                    description: "Seu toque pode apagar a vontade de agir.",
+                    scaleEffects: {
+                        conspicuidade: "Modo Conspicuidade (0-3): Quando você faz a ação Ataque e está dentro de 1,5m de pelo menos dois inimigos, ao acertar um deles, além do dano, o alvo e todas as outras criaturas hostis a até 3m dele devem fazer o teste de resistência de Sabedoria. As que falharem ficam atordoadas até o fim do seu próximo turno.",
+                        eclipse: "Modo Eclipse (4-7): Quando você faz a ação Ataque e acerta, além do dano, o alvo deve fazer o teste de resistência de Sabedoria. Se falhar, você escolhe: ele fica atordoado até o final do próximo turno dele, ou cego até o final do próximo turno dele.",
+                        ocultacao: "Modo Oculto (8-10): Quando você faz a ação Ataque e acerta uma criatura, além do dano, o alvo deve fazer um teste de resistência de Sabedoria (CD da sua habilidade de classe). Se falhar, ele perde sua reação até o fim do seu próximo turno e sua mente apaga momentaneamente o ataque, fazendo-o ignorar você como fonte da ameaça até ser atingido novamente."
+                    }
+                }
+            ],
+            13: [
+                {
+                    name: "Véu da Irrealidade ",
+                    description: "Sua conexão com o limiar da percepção permite que você distorça até mesmo os efeitos mais tangíveis.",
+                    scaleEffects: {
+                        conspicuidade: "Modo Conspicuidade (0-3): Quando você sofre dano, você pode usar sua reação para gastar 2 PE e converter a dor em um espetáculo de resistência. Você reduz o dano sofrido pela metade e, opcionalmente, pode converter a outra metade do dano (que você sofre) para um tipo de sua escolha (de concussão, perfurante, cortante, frio, fogo, etc.). Sua Escala se move 1 ponto para baixo.",
+                        eclipse: "Modo Eclipse (4-7): Quando você sofre dano, você pode usar sua reação para gastar 2 PE e se firmar no ponto de equilíbrio. Você reduz o dano sofrido pela metade. Além disso, sua Escala se move 3 pontos para cima se for noite ou em escuridão, ou 3 pontos para baixo se for dia ou sob luz forte.",
+                        ocultacao: "Modo Oculto (8-10): Quando você sofre dano de uma fonte que você possa ver, você pode usar sua reação para gastar 2 PE e redirecionar parte da realidade do golpe. Você reduz o dano sofrido pela metade. Um alvo válido (criatura ou objeto) a até 1,5m de você sofre a outra metade do dano, do mesmo tipo. Sua Escala se move 1 ponto para cima."
+                    }
+                },
+            ],
+            14: [
+                {
+                    name: "Apoteose do Fantasma ",
+                    description: "Enquanto sua Escala de Obscuridade estiver em 10 (Ocultação Máxima), você transcende algumas limitações físicas. Você tem resistência a dano de concussão, cortante e perfurante proveniente de ataques feitos por criaturas que não tenham conseguido localizá-lo (que estejam surpresas por você ou que tenham falhado em um teste de Percepção contra sua Furtividade). Além disso, você pode, como uma ação bônus, comprimir seu corpo e passar por aberturas de apenas 2,5 centímetros de largura até o final do turno",
+                }
+            ],
+            15: [
+                {
+                    name: "Eclipse Total ",
+                    description: "Como uma ação, você canaliza toda a sua maestria para atingir o ápice de sua arte por 1 minuto, fundindo os extremos da percepção.",
+                },
+            ],
+            17: [
+                {
+                    name: "Pico da Percepção ",
+                    description: "No 17º nível, você atinge o auge do controle em ambos os extremos.",
+                    scaleEffects: {
+                        conspicuidade: "Modo Conspicuidade (0-3): Enquanto sua Escala estiver em 0, sempre que você usar sua reação para realizar um ataque (como um Ataque de Oportunidade ou pela habilidade Eclipse Total), você causa dano máximo com esse ataque. Além disso, você tem vantagem em testes de resistência contra efeitos de medo e encantamento.",
+                        eclipse: "Modo Eclipse (4-7): Enquanto sua Escala estiver em 5, no primeiro turno de cada combate você pode realizar um ataque extra como parte de sua ação de Ataque. Este ataque pode ser feito contra um alvo a até 9m de você como se estivesse adjacente a você. O alvo é considerado surpreso para este ataque específico (ignorando a condição de surpresa normal do combate).",
+                        ocultacao: "Modo Oculto (8-10): Enquanto sua Escala estiver em 10, o primeiro ataque furtivo que você fizer em cada combate causa dano máximo (não role os dados, considere o máximo possível). Além disso, magias e efeitos que revelam criaturas invisíveis exigem que o conjurador tenha sucesso em um teste de Sabedoria (CD da sua habilidade de classe) para localizá-lo."
+                    }
+                }
+            ],
+            18: [
+                {
+                    name: "Mestre do Limiar",
+                    description: "No 18º nível, você unifica completamente seus recursos. Seu limite máximo de Pontos de Eclipse agora é igual ao seu bônus de proficiência + seu modificador de Sabedoria (mínimo de +2). Além disso, quando você usa sua ação Foco do Eclipse, você pode gastar 2 PE para fazê-lo como uma ação bônus.",
+                },
+            ],
+            20: [
+                {
+                    name: "Serenata do Esquecimento ",
+                    description: "No ápice de seu poder, uma vez a cada Descanso Longo, você pode, como uma ação, inundar uma área com uma onda de negação perceptiva, uma 'Serenata do Esquecimento. Por 1 minuto, em um raio de 18m centrado em um ponto que você possa ver dentro de 9m: \n\n •	Todas as criaturas (a sua escolha) na área têm desvantagem em testes de Sabedoria (Percepção, Intuição, Sobrevivência) e em testes de habilidade para manter concentração. \n\n •	No início de cada um dos seus turnos, escolha uma criatura na área. Todas as outras criaturas na área devem fazer um teste de resistência de Sabedoria (CD = 8 + seu bônus de proficiência + seu modificador de Sabedoria). Se falharem, elas esquecem completamente a existência da criatura escolhida até o início do seu próximo turno. Elas não podem interagir com, atacar, ou sequer perceber a criatura esquecida, racionalizando quaisquer evidências de suas ações. Esta área se move com o ponto central, que você pode realocar com uma ação bônus em cada um dos seus turnos. ",
                 }
             ]
         };
@@ -2024,31 +2109,30 @@
         const racialFeatures = [
             {
                 name: "Flor Delicada",
-                description: "Criatura planta pura com corpo aveludado como pétalas. Clorofila passa pelas veias. Envelhece adquirindo cor marrom e textura de casca."
+                description: "O seu tipo de criatura é Planta Humanoide. Os Sylvan possuem fraqueza aos seguintes tipode dano: Cortante, Perfurante, Contundente e Fogo."
             },
             {
                 name: "Peculiaridade Sylvan",
-                description: "Tipo: Planta Humanoide. Fraqueza a Cortante, Perfurante, Contundente e Fogo. Fotossíntese: 1h de sol = 1 dia de comida. Enraíza-se para descansar (4 horas)."
+                description: "Você é capaz de realizar a fotossíntese. Você não precisa de comida. Se você passar pelo menos 1 hora por dia sob a luz direta do sol, será alimentado com o equivalente a 1 dia de rações. Você ainda precisa de água, mas não precisa bebê-la; em vez disso, você a absorve através de suas raízes. Você também não precisa dormir, e efeitos mágicos não podem deixá-lo inconsciente. Em vez disso, você se enraíza no chão (se puder) e permanece em um estado ocioso por 4 horas, durante as quais você recebe todos os benefícios de um longo descanso. Você pode prender a respiração por até 1 hora, pois não respira como outras criaturas."
             },
             {
                 name: "Secreção Ácida",
-                description: "Reação: cobre corpo com ácido. Contato causa 1d10 ácido e 1d10/turno por 1h. Usos: 1/descanso longo. Sylvan não é afetado."
-            },
+                description: "Os Sylvan possuem uma secreção que eles podem expelir sobre o corpo que pode protegê-los de criaturas. Com uma reação um Sylvan pode expelir uma secreção que cobrirá todo o seu corpo. qualquer coisa que entre em contato com a pele de um Sylvan sofrerá 1d10 de dano ácido e ficará coberta nessa substância até que seja lavada com água. Aquilo que estiver coberto por essa substância levará 1d10 de dano ácido ao início de cada um de seus rodadas. Esse efeito irá durar por 1hora ou até que seja limpo com água. Uma vez que o Sylvan utilize essa habilidade ele irá ficar coberto nessa substância até que ele tome um banho. Você não é afetado pelos efeitos dessa substancia. Você só poderá utilizar essa habilidade novamente depois de um descanso longo."            },
             {
                 name: "Visão no Escuro",
-                description: "Ver 18m na penumbra como luz clara, mais 18m na escuridão como penumbra. Na escuridão só distingue tons de cinza."
+                description: "Os Sylvan são fortemente adaptados ao escuro. Um Sylvan com essa característica consegue enxergar a 18m em meia-luz como se fosse dia, Mais 18m na escuridão como se fosse meia-luz. Na escuridão ele sódistingue tons de cinza."
             },
             {
                 name: "Performance Impecável",
-                description: "Proficiência em Performance. Sylvan são vaidosos e gostam de atrair atenção."
+                description: "Os Sylvan conseguem utilizar a sua incrível beleza para realizar performances de tirar o folego. Esses Sylvan possuem proficiência em Performance."
             },
             {
                 name: "Sensibilidade de uma Flor",
-                description: "Sente mudanças climáticas com precisão. Adaptado às variações do ambiente."
+                description: "Os Sylvan são extremamente sensíveis as mais diferenças climáticas. Esses sabem precisamente quando o clima irá mudar."
             },
             {
                 name: "Falar com Plantas",
-                description: "Comunicação básica com plantas e pequenos comandos. As plantas não respondem perguntas complexas."
+                description: "Os Sylvan conseguem se comunicar com as plantas. Apesar das plantas não conseguirem responder perguntas complexas esses Sylvan conseguem entender as suas respostas e até mesmo fazer pequenos comandos a elas."
             }
         ];
 
@@ -2589,7 +2673,7 @@
 
         function updateSkillCount() {
             const selectedSkills = document.querySelectorAll('.skill-check:checked').length;
-            const maxSkills = 3;
+            const maxSkills = 99;
             document.getElementById('skill-count').textContent = `(${selectedSkills}/${maxSkills})`;
             
             if (selectedSkills >= maxSkills) {
